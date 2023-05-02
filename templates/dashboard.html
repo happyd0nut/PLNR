@@ -21,8 +21,8 @@
     <nav class="navbar navbar-light nav justify-content-between">
         <a class="navbar-brand nav-text">PLNR</a>
         <div class="dropdown show">
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img id="pfp" src="../static/images/profile.png">
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -30,47 +30,66 @@
             </div>
         </div>
     </nav>
-    
+
     <div class="intro col-12">
         <h1>Julia's Dashboard</h1>
     </div>
 
     <div class="dashboard row">
-        <div class="taskcol row col-xl-9 col-md-8">
-            <div class="box col-xl-2 col-sm-4">
-                <p>Class 1</p>
-                <div class="tasks">
-                    <p>Task 1</p>
+        <div class="card-deck col-xl-9 col-md-8 ">
+            <div class="card col-md-8 ">
+                <div class="card-body">
+                    <h5 class="card-title">Class 1</h5>
+                    <div class="tasks">
+                        <p>Task 1</p>
+                        <p>Task 2</p>
+                        <p>Task 3</p>
+                        <p>Task 4</p>
+                        <p>Task 5</p>
+                        <p>Task 6</p>
+                    </div>
                 </div>
             </div>
-            <div class="box col-xl-2 col-sm-4">
-                <p>Class 2</p>
+
+            <!-- there are some issues with the boxes not cascading down correctly -->
+            <!-- could set a minimum card size -->
+
+            <div class="card col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Class 2</h5>
+                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.
+                    </p>
+                </div>
             </div>
-            <div class="box col-xl-2 col-sm-4">
-                <p>Class 3</p>
+
+            <div class="w-100 d-none d-sm-block d-md-none"><!-- wrap every 2 on sm--></div>
+
+            <div class="card col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Class 3</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                        additional content. This card has even longer content than the first to show that equal height
+                        action.</p>
+                </div>
             </div>
-            <div class="box col-xl-2 col-sm-4">
-                <p>Class 4</p>
+
+            <div class="w-100 d-none d-md-block d-lg-none"><!-- wrap every 3 on md--></div>
+
+            <div class="card col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Class 4</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                        additional content. This card has even longer content than the first to show that equal height
+                        action.</p>
+                </div>
             </div>
-            <div class="box col-xl-2 col-sm-4">
-                <p>Class 5</p>
-            </div>
-            <div class="box col-xl-2 col-sm-4">
-                <p>Class 6</p>
-            </div>
+
         </div>
 
-        <div class="notes col-xl-2 col-md-4">
+        <div class="notes col-xl-2 col-md-3 col-sm-6">
             <p>Notes</p>
         </div>
-
     </div>
-
-
-
-
-
-
 
     <!-- Your Content ABOVE this Line -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

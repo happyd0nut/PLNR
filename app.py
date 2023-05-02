@@ -9,6 +9,8 @@ app.secret_key = "Change Me"
 
 # TODO: Fill in methods and routes
 
+
+
 @app.before_first_request
 def setup():
     init_db()

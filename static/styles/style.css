@@ -1,5 +1,6 @@
 body {
   overflow-x: hidden;
+
 }
 
 html, body, .container-fluid {
@@ -58,6 +59,12 @@ html, body, .container-fluid {
 .btn-primary:focus {
   outline: none;
   box-shadow: none;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+  background-color: #34393c;
+  border-color: #34393c;
+
 }
 
 
@@ -154,7 +161,7 @@ body#dashboard {
   background-color: #929ea49b;
   border-radius: 20px;
   text-align: center;
-  margin-top:1.5vh;
+
 }
 
 .box {
@@ -170,21 +177,42 @@ body#dashboard {
   font-family: 'Gotu';
 }
 
-.tasks::before {
-  content: '☐'
+.tasks p::before {
+  content: '☐  '
 }
 
 .tasks {
   display: flex;
+  flex-direction: column;
   justify-content: left;
   font-family: 'Gotu';
   font-size: 13px;
 }
 
+.card {
+  max-height:35vh;
+  border-radius: 20px;
+}
+
+.card-body {
+  overflow-y: scroll;
+}
+
+.card-title {
+  position:sticky;
+  top:0;
+  background-color: white;
+  text-align: center;
+  font-family: 'Gotu';
+}
+.card-deck, .notes{
+  margin-top:1.5vh;
+}
+
 /* New Task Style */
 
 body#newtask {
-  background-color: rgb(175, 80, 80);
+  background-color: #bbc7cd7e;
   font-family: 'Gotu';
 }
 
@@ -218,3 +246,11 @@ body#newtask {
   margin-bottom: 30px;
   font-family: 'Plaster';
 }
+
+/* Signup Style */
+
+body#signup {
+  background-color: #929ea4c1;
+  font-family: 'Gotu';
+}
+
