@@ -18,17 +18,32 @@
 </head>
 
 <body id="dashboard">
-    <nav class="navbar navbar-light nav justify-content-between">
-        <a class="navbar-brand nav-text">PLNR</a>
-        <div class="dropdown show">
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img id="pfp" src="../static/images/profile.png">
-            </a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="dashboard.html">Logout</a>
-            </div>
+
+    <nav class="navbar navbar-expand-lg nav ">
+        <a class="navbar-brand" href="#">PLNR</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('dashboard')}}">Dashboard <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('newtask')}}">Create New Task <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
         </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img class="" src="../static/images/profile.png">
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="{{url_for('login')}}">Logout</a>
+              <!-- How do you log out user? -->
+            </div>
+          </div>
     </nav>
 
     <div class="intro col-12">
@@ -83,6 +98,7 @@
                         action.</p>
                 </div>
             </div>
+            
 
         </div>
 
@@ -90,6 +106,11 @@
             <p>Notes</p>
         </div>
     </div>
+
+
+
+
+
 
     <!-- Your Content ABOVE this Line -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

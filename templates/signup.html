@@ -29,28 +29,28 @@
             
             <div class="col-sm-8 col-md-5 col-lg-4 col-xl-3 card-login">
             
-                <form>
+                <form action="#" method="POST">
                     <div class="form-group">
-                        <input type="first-name" class="form-control input-box" placeholder="First Name">
+                        <input type="text" id="fname" name="fname" class="form-control input-box" placeholder="First Name">
                     </div>
                     <div class="form-group ">
-                        <input type="last-name" class="form-control input-box" placeholder="Last Name">
+                        <input type="text" id="lname" name="lname" class="form-control input-box" placeholder="Last Name">
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control input-box" placeholder="Email">
+                        <input type="text" id="email" name="email" class="form-control input-box" placeholder="Email">
                     </div>
                     <div class="form-group">
-                        <input type="username" class="form-control input-box" placeholder="Username">
+                        <input type="text" id="username" name="username" class="form-control input-box" placeholder="Username">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control input-box" placeholder="Password">
+                        <input type="password" id="password" name="password" class="form-control input-box" placeholder="Password">
                     </div>
                     <div class="button">
-                        <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                        <button type="text" class="btn btn-primary btn-block">Sign Up</button>
                     </div>
                 </form>
                 <div class="small-text">
-                    <p class="misc-text">Have an account? <a href="#">Login Here</a></p>
+                    <p class="misc-text">Have an account? <a href="{{url_for('login')}}">Login Here</a></p>
                 </div>
 
             </div>
