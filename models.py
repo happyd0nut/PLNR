@@ -17,8 +17,8 @@ class User (Base):
     email = Column("email", TEXT, nullable=False)
     username = Column("username", TEXT, nullable=False)
     password = Column("password", TEXT, nullable=False)
-    subject = relationship("Subject", secondary="enrollments", back_populates="user")
-    tasks = relationship("Task", back_populates="user") 
+    
+    subjects = relationship("Subject", secondary="enrollments", back_populates="user")
    
 
     def __init__(self, first_name, last_name, email, username, password): 
@@ -36,7 +36,7 @@ class Enrollment (Base):
 
     id = Column("id", INTEGER, primary_key=True)
     user_id = Column("user_id", INTEGER, ForeignKey("users.id"))
-    subject_id = Column("subject_id", INTEGER, ForeignKey("subject.id"))
+    subject_id = Column("subject_id", INTEGER, ForeignKey("subjects.id"))
 
     def __init__(self, user_id, subject_id): 
         self.user_id = user_id
@@ -52,7 +52,9 @@ class Subject (Base):
     name = Column("name", TEXT, nullable=False)
     teacher = Column("teacher", TEXT)
     period = Column("period", TEXT)
-    user = relationship("User", secondary="enrollments", back_populates="subject")
+
+    user = relationship("User", secondary="enrollments", back_populates="subjects")
+    tasks = relationship("Task", back_populates="subject")
 
     def __init__(self, name, teacher, period): 
         self.name = name
@@ -69,11 +71,11 @@ class Task (Base):
     name = Column("name", TEXT, nullable=False)
     due_date = Column("due_date", INTEGER)
     notes = Column("period", TEXT)
-    subject_id = Column("subject_id", INTEGER, ForeignKey("subject.id") nullable=False)
-    user_id = Column("user_id", INTEGER, ForeignKey("users.id"), nullable=False)
+    subject_id = Column("subject_id", INTEGER, ForeignKey("subjects.id"))
+    user_id = Column("user_id", INTEGER, ForeignKey("users.id"))
 
     subject = relationship("Subject", back_populates="tasks")
-    user = relationship("User", back_populates="tasks")
+
 
     def __init__(self, name, due_date, notes, subject_id, user_id): 
         self.name = name

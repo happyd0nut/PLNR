@@ -2,7 +2,7 @@ body {
   overflow-x: hidden;
 }
 
-html, body, .container-fluid {
+html, body {
   height: 100%;
 }
 
@@ -120,7 +120,10 @@ body#login{
   background-color: #fff;
   font-size: 10px;
   border-radius: 10px;
-  padding:3rem;
+  padding-left:3rem;
+  padding-right:3rem;
+  padding-top:3rem;
+  padding-bottom:2rem;
 }
 
 .form-control:focus {
@@ -141,9 +144,21 @@ body#login{
   font-family: 'Gotu';
   font-size:15px;
   display:flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding-top:20px
+}
+.small-text p {
+  margin-bottom: 0.5rem;
+}
+
+.alert {
+  color:red;
+}
+
+.sub{
+  padding-top:0;
 }
 
 /* Dashboard Style */
@@ -251,10 +266,6 @@ body#newtask {
   border-radius: 10px;
   background-color: #BBC7CD;
 }
-.side{
-  display: flex;
-
-}
 
 .head {
   text-align: center;
@@ -262,6 +273,9 @@ body#newtask {
   font-family: 'Plaster';
 }
 
+.container-fluid {
+  height:90%;
+}
 
 /* Signup Style */
 

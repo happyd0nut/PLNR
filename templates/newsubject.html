@@ -19,7 +19,8 @@
 
 </head>
 
-<body id="newtask">
+<body id="newtask" class="sub">
+
     <nav class="navbar navbar-expand-lg nav sticky-top">
         <a class="navbar-brand" href="#">PLNR</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -33,23 +34,19 @@
                             class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('newtask')}}">Task Creation<span
-                            class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{url_for('newtask')}}">Task Creation<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('newsubject')}}">Subject Creation<span
-                            class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{url_for('newsubject')}}">Subject Creation<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img class="" src="../static/images/profile.png">
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="{{url_for('login')}}">Logout</a>
-                <!-- How do you log out user? -->
             </div>
         </div>
     </nav>
@@ -63,23 +60,31 @@
 
                 <form action="#" method="POST">
                     <div class="form-group">
-                        <input type="text" id="task" name="task" class="form-control input-box" placeholder="Task Name">
+                        <input type="text" id="subname" name="subname" class="form-control input-box" placeholder="Subject Name">
                     </div>
                     <div class="row">
                         <div class="form-group col-6">
-                            <input type="text" id="subject" name="subject" class="form-control input-box"
-                                placeholder="Subject">
+                            <input type="text" id="teacher" name="teacher" class="form-control input-box"
+                                placeholder="Teacher">
                         </div>
                         <div class="form-group col-6">
-                            <input type="date" id="duedate" name="duedate" class="form-control input-box"
-                                placeholder="Due Date">
+                            <input type="text" id="period" name="period" class="form-control input-box"
+                                placeholder="Period">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <input type="text" id="notes" name="notes" class="form-control input-box" placeholder="Notes">
+
+                    <div class="small-text sub">
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for msg in messages %}
+                                    <p class="alert">{{msg}}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
                     </div>
+
                     <div class="button">
-                        <button type="submit" class="btn btn-primary btn-block">Create Task</button>
+                        <button type="submit" class="btn btn-primary btn-block">Create Class</button>
                     </div>
                 </form>
 
