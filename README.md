@@ -1,2 +1,2 @@
-# Planr
+# PLNR
 Productivity dashboard for students
