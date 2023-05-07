@@ -19,6 +19,7 @@ class User (Base):
     password = Column("password", TEXT, nullable=False)
     
     subjects = relationship("Subject", secondary="enrollments", back_populates="user")
+    tasks = relationship("Task", back_populates="user")
    
 
     def __init__(self, first_name, last_name, email, username, password): 
@@ -70,11 +71,12 @@ class Task (Base):
     id = Column("id", INTEGER, primary_key=True)
     name = Column("name", TEXT, nullable=False)
     due_date = Column("due_date", INTEGER)
-    notes = Column("period", TEXT)
+    notes = Column("notes", TEXT)
     subject_id = Column("subject_id", INTEGER, ForeignKey("subjects.id"))
     user_id = Column("user_id", INTEGER, ForeignKey("users.id"))
 
     subject = relationship("Subject", back_populates="tasks")
+    user = relationship("User", back_populates="tasks")
 
 
     def __init__(self, name, due_date, notes, subject_id, user_id): 

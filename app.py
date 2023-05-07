@@ -3,15 +3,15 @@ from database import init_db, db_session
 from models import *
 
 app = Flask(__name__)
-app.secret_key = "648fyei838902idjfueu"
+app.secret_key = "648fyei838902idjfueu=="
 
 
 @app.route("/", methods=["POST", "GET"])
 @app.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == 'GET':
+
         if session.get('username') != None:
-            print(session["username"])
             session.pop("username")
         return render_template("login.html")
     else:
@@ -20,7 +20,6 @@ def login():
         
         user = db_session.query(User).where(User.username==username).first()
         validuser = user != None
-        print(validuser)
         #for debugging above
   
         if validuser:
@@ -60,7 +59,9 @@ def signup():
 
 @app.route("/dashboard")
 def dashboard():
-    return render_template("dashboard.html")
+    print(session["username"])
+    tasks = db_session.query(User).where(User.username == session["username"]).first().tasks
+    return render_template("dashboard.html", tasks=tasks)
 
 
 @app.route("/newtask", methods=["POST", "GET"])
@@ -74,7 +75,16 @@ def newtask():
         notes = request.form["notes"]
 
         # TODO: add inputs to database
-
+        user_id = db_session.query(User).where(User.username == session["username"]).first().id
+        subjectList = db_session.query(User).where(User.username == session["username"]).first().subjects
+        for i in subjectList:
+            print(i.name)
+            if i.name == subject:
+                
+                db_session.add(Task(task, duedate, notes, i.id, user_id))
+                db_session.commit()
+                break
+        
         return redirect(url_for("dashboard"))
         
 
@@ -88,7 +98,7 @@ def newsubject():
         teacher = request.form["teacher"]
         period = request.form["period"]
 
-        subExists = db_session.query(Subject).where(Subject.name==subname).first() != None
+        subExists = db_session.query(Subject).where((Subject.name==subname) & User.username == session["username"]).first() != None
         if subExists:
             flash("That subject name already exists. Try another.", "info")
             return redirect(url_for("newsubject"))
@@ -100,7 +110,6 @@ def newsubject():
             db_session.refresh(newSub)
             db_session.add(Enrollment(userid, newSub.id))
             db_session.commit()
-            print(newSub.id)
             return redirect(url_for("dashboard"))
         
 

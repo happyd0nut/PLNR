@@ -54,16 +54,16 @@
 
     <div class="dashboard row">
         <div class="card-deck col-xl-9 col-md-8 ">
+
             <div class="card col-md-8 ">
                 <div class="card-body">
                     <h5 class="card-title">Class 1</h5>
                     <div class="tasks">
-                        <p>Task 1</p>
-                        <p>Task 2</p>
-                        <p>Task 3</p>
-                        <p>Task 4</p>
-                        <p>Task 5</p>
-                        <p>Task 6</p>
+                        {% for task in tasks %}
+                            <p>{{task.name}}</p>
+                            <!-- <label for="cb1">Click me</label>
+                            <input type="checkbox" id="cb1"> another way to make checkbox, but does not save for later-->
+                        {% endfor %}
                     </div>
                 </div>
             </div>
