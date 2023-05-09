@@ -10,7 +10,6 @@ app.secret_key = "648fyei838902idjfueu=="
 @app.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == 'GET':
-
         if session.get('username') != None:
             session.pop("username")
         return render_template("login.html")
@@ -18,11 +17,11 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
         
-        user = db_session.query(User).where(User.username==username).first()
-        validuser = user != None
+        validuser = db_session.query(User).where(User.username==username).first() != None
         #for debugging above
   
         if validuser:
+            user = db_session.query(User).where(User.username == username).first()
             if user.password == password:
                 session["username"] = username
                 return redirect(url_for("dashboard"))
@@ -54,14 +53,26 @@ def signup():
             db_session.add(newUser)
             db_session.commit()
             session["username"] = username
+
+            # newSub = Subject(name="Welcome!")
+            # db_session.add(newSub)
+            # db_session.commit()
+            # db_session.refresh(newSub)
+            
+            # user_id = db_session.query(User).where(User.username == session["username"]).first().id
+            # db_session.add(Enrollment(user_id, newSub.id))
+            # db_session.add(Task(name="Create a new Subject!", subject_id=newSub.id, user_id=user_id))
+            # db_session.commit()
+
             return redirect(url_for("dashboard"))
 
 
 @app.route("/dashboard")
 def dashboard():
-    print(session["username"])
-    tasks = db_session.query(User).where(User.username == session["username"]).first().tasks
-    return render_template("dashboard.html", tasks=tasks)
+    name = db_session.query(User).where(User.username==session["username"]).first().first_name
+    deck = db_session.query(User).where(User.username == session["username"]).first().subjects
+    print(deck)
+    return render_template("dashboard.html", deck=deck,name=name)
 
 
 @app.route("/newtask", methods=["POST", "GET"])
@@ -70,22 +81,20 @@ def newtask():
        return render_template("newtask.html")
     else:
         task = request.form["task"]
-        subject = request.form["subject"]
+        subject = request.form.get("subject")
         duedate = request.form["duedate"]
         notes = request.form["notes"]
 
-        # TODO: add inputs to database
         user_id = db_session.query(User).where(User.username == session["username"]).first().id
         subjectList = db_session.query(User).where(User.username == session["username"]).first().subjects
-        for i in subjectList:
-            print(i.name)
+        for i in subjectList: # looks for subject in database
             if i.name == subject:
-                
-                db_session.add(Task(task, duedate, notes, i.id, user_id))
+                db_session.add(Task(name=task, subject_id=i.id, user_id=user_id, due_date=duedate, notes=notes))
                 db_session.commit()
-                break
-        
-        return redirect(url_for("dashboard"))
+                return redirect(url_for("dashboard"))
+        flash("That subject does not exist. Try another.", "info")
+        return render_template("newtask.html", subjectList = subjectList)
+
         
 
 @app.route("/newsubject", methods=["POST", "GET"])
@@ -98,21 +107,22 @@ def newsubject():
         teacher = request.form["teacher"]
         period = request.form["period"]
 
-        subExists = db_session.query(Subject).where((Subject.name==subname) & User.username == session["username"]).first() != None
-        if subExists:
+        userid = db_session.query(User).where(User.username == session["username"]).first().id
+        subExists = db_session.query(Subject).where((Subject.name==subname) & (Subject.user_id == userid)).first() != None
+        if  subExists:
             flash("That subject name already exists. Try another.", "info")
             return redirect(url_for("newsubject"))
         else:
             userid = db_session.query(User).where(User.username == session["username"]).first().id
-            newSub = Subject(subname, teacher, period)
+            newSub = Subject(name=subname, user_id=userid, teacher=teacher, period=period)
             db_session.add(newSub)
-            db_session.commit()
-            db_session.refresh(newSub)
-            db_session.add(Enrollment(userid, newSub.id))
             db_session.commit()
             return redirect(url_for("dashboard"))
         
-
+# TODO:
+# - add back logout button
+# - ability to sort by date
+# - ability to cross out!!
         
 if __name__ == "__main__":
     init_db()

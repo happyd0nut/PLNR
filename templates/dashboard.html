@@ -15,12 +15,13 @@
     <link rel="stylesheet" type="text/css" href="../static/styles/style.css">
     <link href='https://fonts.googleapis.com/css?family=Plaster' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Gotu' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
 </head>
 
 <body id="dashboard">
-
     <nav class="navbar navbar-expand-lg nav sticky-top">
-        <a class="navbar-brand" href="#">PLNR</a>
+        <a class="navbar-brand" href="{{url_for('dashboard')}}">PLNR</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -28,85 +29,62 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('dashboard')}}">Dashboard <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{url_for('dashboard')}}">Dashboard <span
+                            class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('newtask')}}">Task Creation<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{url_for('newsubject')}}">Subject Creation<span
+                            class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('newsubject')}}">Subject Creation<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{url_for('newtask')}}">Task Creation<span
+                            class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <!-- <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img class="" src="../static/images/profile.png">
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="{{url_for('login')}}">Logout</a>
             </div>
-        </div>
+        </div> -->
     </nav>
 
     <div class="intro col-12">
-        <h1>Julia's Dashboard</h1>
+        <h1>{{name}}'s Dashboard</h1>
     </div>
 
     <div class="dashboard row">
-        <div class="card-deck col-xl-9 col-md-8 ">
-
-            <div class="card col-md-8 ">
-                <div class="card-body">
-                    <h5 class="card-title">Class 1</h5>
+        <div class="row col col-xl-9 col-md-8 col-11">
+            {% for subject in deck %}
+                <div class="box col col-xl-3 col-sm-5 col-10">
+                    <h6 class="">{{subject.name}}</h6>
                     <div class="tasks">
-                        {% for task in tasks %}
-                            <p>{{task.name}}</p>
-                            <!-- <label for="cb1">Click me</label>
-                            <input type="checkbox" id="cb1"> another way to make checkbox, but does not save for later-->
+                        {% for task in subject.tasks %}
+                        <p>{{task.name}}</p>
                         {% endfor %}
                     </div>
                 </div>
-            </div>
+            {% endfor %}
+        </div>
 
-            <!-- there are some issues with the boxes not cascading down correctly -->
-            <!-- could set a minimum card size -->
+        <div class="notes col col-xl-2 col-md-3 col-sm-6 col-9">
+            <h6>Notes</h6>
 
-            <div class="card col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">Class 2</h5>
-                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.
-                    </p>
-                </div>
-            </div>
-
-            <div class="w-100 d-none d-sm-block d-md-none"><!-- wrap every 2 on sm--></div>
-
-            <div class="card col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">Class 3</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This card has even longer content than the first to show that equal height
-                        action.</p>
-                </div>
-            </div>
-
-            <div class="w-100 d-none d-md-block d-lg-none"><!-- wrap every 3 on md--></div>
-
-            <div class="card col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">Class 4</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This card has even longer content than the first to show that equal height
-                        action.</p>
-                </div>
-            </div>
-            
 
         </div>
 
-        <div class="notes col-xl-2 col-md-3 col-sm-6">
-            <p>Notes</p>
-        </div>
+        <a href="{{url_for('newtask')}}" class="float">
+            <span class="plus">+</span>
+        </a>
+
+        <a href="{{url_for('newsubject')}}" class="float subicon">
+            <i class="bi bi-file-plus"></i>
+        </a>
+
     </div>
 
 

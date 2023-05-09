@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    
+
 <head>
     <title>Task Creation - PLNR</title>
     <!-- Required meta tags -->
@@ -21,7 +21,7 @@
 
 <body id="newtask">
     <nav class="navbar navbar-expand-lg nav sticky-top">
-        <a class="navbar-brand" href="#">PLNR</a>
+        <a class="navbar-brand" href="{{url_for('dashboard')}}">PLNR</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -33,11 +33,11 @@
                             class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('newtask')}}">Task Creation<span
+                    <a class="nav-link" href="{{url_for('newsubject')}}">Subject Creation<span
                             class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('newsubject')}}">Subject Creation<span
+                    <a class="nav-link" href="{{url_for('newtask')}}">Task Creation<span
                             class="sr-only">(current)</span></a>
                 </li>
             </ul>
@@ -62,11 +62,19 @@
                 </div>
 
                 <form action="#" method="POST">
+                    <a class="icon">
+                        <span class="plus">+</span>
+                    </a>
                     <div class="form-group">
                         <input type="text" id="task" name="task" class="form-control input-box" placeholder="Task Name">
                     </div>
                     <div class="row">
                         <div class="form-group col-6">
+                            <!-- <select id="subject" name="subject" class="form-control input-box">
+                                {% for i in subjectList %}
+                                    <option value="{{i.name}}">{{i.name}}</option>
+                                {% endfor %}
+                            </select> -->
                             <input type="text" id="subject" name="subject" class="form-control input-box"
                                 placeholder="Subject">
                         </div>
@@ -78,11 +86,20 @@
                     <div class="form-group">
                         <input type="text" id="notes" name="notes" class="form-control input-box" placeholder="Notes">
                     </div>
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <div class="small-text">
+                        {% for msg in messages %}
+                        <p class="alert">{{msg}}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+
                     <div class="button">
                         <button type="submit" class="btn btn-primary btn-block">Create Task</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
