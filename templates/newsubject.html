@@ -41,14 +41,9 @@
                             class="sr-only">(current)</span></a>
                 </li>
             </ul>
-        </div>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img class="" src="../static/images/profile.png">
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="{{url_for('login')}}">Logout</a>
-            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{url_for('login')}}"><i class="bi bi-person-fill"></i></span> Logout</a></li>
+            </ul>
         </div>
     </nav>
 

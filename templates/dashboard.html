@@ -20,7 +20,7 @@
 </head>
 
 <body id="dashboard">
-    <nav class="navbar navbar-expand-lg nav sticky-top">
+    <nav class="navbar navbar-expand-lg nav sticky-top navbar-light">
         <a class="navbar-brand" href="{{url_for('dashboard')}}">PLNR</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,16 +41,10 @@
                             class="sr-only">(current)</span></a>
                 </li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{url_for('login')}}"><i class="bi bi-person-fill"></i></span> Logout</a></li>
+            </ul>
         </div>
-        <!-- <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img class="" src="../static/images/profile.png">
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="{{url_for('login')}}">Logout</a>
-            </div>
-        </div> -->
     </nav>
 
     <div class="intro col-12">
@@ -60,19 +54,46 @@
     <div class="dashboard row">
         <div class="row col col-xl-9 col-md-8 col-11">
             {% for subject in deck %}
-                <div class="box col col-xl-3 col-sm-5 col-10">
-                    <h6 class="">{{subject.name}}</h6>
-                    <div class="tasks">
-                        {% for task in subject.tasks %}
-                        <p>{{task.name}}</p>
-                        {% endfor %}
-                    </div>
+            <div class="box col col-xl-3 col-sm-5 col-10">
+                <h6 class="">{{subject.name}}</h6>
+                <div class="tasks">
+                    {% for task in subject.tasks %}
+                    <p>{{task.name}}</p>
+                    {% endfor %}
                 </div>
+            </div>
             {% endfor %}
         </div>
 
         <div class="notes col col-xl-2 col-md-3 col-sm-6 col-9">
             <h6>Notes</h6>
+            <br>
+            <span id="textbox">
+                <div id="edit" contenteditable="true">
+                    Here is the element's original content
+                </div>
+                <input type="button" value="save my edits" onclick="saveEdits()"/>
+
+            </span>
+            
+            <script>
+                function saveEdits() {
+
+                    //get the editable element
+                    var editElem = document.getElementById("edit");
+                    
+                    //get the edited element content
+                    var userVersion = editElem.innerHTML;
+                    
+                    //save the content to local storage
+                    localStorage.userEdits = userVersion;
+                    
+                    //write a confirmation to the user
+                    document.getElementById("update").innerHTML="Edits saved!";
+                    
+                }
+
+            </script>
 
 
         </div>
